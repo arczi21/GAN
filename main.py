@@ -54,7 +54,7 @@ for step in range(n_iter):
         loss.backward()
         optimd.step()
     noise = distribution.sample((batch_size, noise_size, 1, 1)).to(device)
-    loss = torch.log(1 - d(g(noise)))
+    loss = - torch.log(d(g(noise)))
     loss = loss.mean()
     optimg.zero_grad()
     loss.backward()
